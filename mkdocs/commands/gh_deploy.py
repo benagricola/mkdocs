@@ -131,6 +131,7 @@ def gh_deploy(
             mesg=message,
             remote=remote_name,
             branch=remote_branch,
+            prefix=config.site_dir,
             push=True,
             force=force,
             use_shell=shell,
