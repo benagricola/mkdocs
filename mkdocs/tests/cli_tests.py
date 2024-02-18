@@ -404,6 +404,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme=None,
@@ -484,6 +485,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch='foo',
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme=None,
@@ -505,6 +507,29 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name='foo',
+            remote_prefix=None,
+            config_file=None,
+            strict=None,
+            theme=None,
+            use_directory_urls=None,
+            site_dir=None,
+        )
+
+    @mock.patch('mkdocs.config.load_config', autospec=True)
+    @mock.patch('mkdocs.commands.build.build', autospec=True)
+    @mock.patch('mkdocs.commands.gh_deploy.gh_deploy', autospec=True)
+    def test_gh_deploy_remote_prefix(self, mock_gh_deploy, mock_build, mock_load_config):
+        result = self.runner.invoke(
+            cli.cli, ['gh-deploy', '--remote-prefix', 'foo'], catch_exceptions=False
+        )
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(mock_gh_deploy.call_count, 1)
+        self.assertEqual(mock_build.call_count, 1)
+        mock_load_config.assert_called_once_with(
+            remote_branch=None,
+            remote_name=None,
+            remote_prefix='foo',
             config_file=None,
             strict=None,
             theme=None,
@@ -554,6 +579,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=True,
             theme=None,
@@ -575,6 +601,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme='readthedocs',
@@ -596,6 +623,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme=None,
@@ -617,6 +645,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme=None,
@@ -638,6 +667,7 @@ class CLITests(unittest.TestCase):
         mock_load_config.assert_called_once_with(
             remote_branch=None,
             remote_name=None,
+            remote_prefix=None,
             config_file=None,
             strict=None,
             theme=None,

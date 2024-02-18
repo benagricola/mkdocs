@@ -131,6 +131,9 @@ remote_branch_help = (
 remote_name_help = (
     "The remote name to commit to for GitHub Pages. This overrides the value specified in config"
 )
+remote_prefix_help = (
+    "The remote prefix to copy to for GitHub Pages. This overrides the value specified in config"
+)
 force_help = "Force the push to the repository."
 no_history_help = "Replace the whole Git history with one new commit."
 ignore_version_help = (
@@ -291,6 +294,7 @@ def build_command(clean, **kwargs):
 @click.option('-m', '--message', help=commit_message_help)
 @click.option('-b', '--remote-branch', help=remote_branch_help)
 @click.option('-r', '--remote-name', help=remote_name_help)
+@click.option('-p', '--remote-prefix', default=None, help=remote_prefix_help)
 @click.option('--force', is_flag=True, help=force_help)
 @click.option('--no-history', is_flag=True, help=no_history_help)
 @click.option('--ignore-version', is_flag=True, help=ignore_version_help)

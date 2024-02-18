@@ -147,6 +147,12 @@ class MkDocsConfig(base.Config):
     remote_name = c.Type(str, default='origin')
     """The remote name to push to when using gh-deploy."""
 
+    remote_prefix = c.Optional(c.Type(str, default=None))
+    """The remote prefix to push to when using gh-deploy.
+    A prefix of "dev" would commit everything from site_dir into a "dev"
+    subdirectory on the remote branch. When not specified, the root of the
+    branch is used."""
+
     extra = c.SubConfig()
     """extra is a mapping/dictionary of data that is passed to the template.
     This allows template authors to require extra configuration that not
