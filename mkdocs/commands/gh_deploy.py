@@ -110,6 +110,7 @@ def gh_deploy(
 
     remote_branch = config.remote_branch
     remote_name = config.remote_name
+    remote_prefix = config.remote_prefix
 
     if not ignore_version:
         _check_version(remote_branch)
@@ -120,9 +121,10 @@ def gh_deploy(
     message = message.format(version=mkdocs.__version__, sha=sha)
 
     log.info(
-        "Copying '%s' to '%s' branch and pushing to GitHub.",
+        "Copying '%s' to '%s' branch, subdirectory '%s' and pushing to GitHub.",
         config.site_dir,
-        config.remote_branch,
+        remote_branch,
+        remote_prefix or '/',
     )
 
     try:
@@ -131,7 +133,7 @@ def gh_deploy(
             mesg=message,
             remote=remote_name,
             branch=remote_branch,
-            prefix=config.site_dir,
+            prefix=remote_prefix,
             push=True,
             force=force,
             use_shell=shell,
